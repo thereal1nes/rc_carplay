@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+  <div id = "maincontainer" class="maincontainer" style="display: none;">
+    <div class="carimage glass-panel">
+
+      <!-- Sidebar -->
+      <aside class="sidebar glass-panel">
+        <div class="status-bar">
+          <i class="fas fa-signal"></i>
+          <span>5G</span>
+        </div>
+
+        <div class="sidebar-nav">
+          <div class="app-dock-icon glass-panel glass-panel--green">
+            <img src="rc-logo.png" alt="RC">
+          </div>
+
+          <div class="nav-icon nav-icon--active glass-panel glass-panel--green">
+            <span class="nav-icon-indicator"></span>
+            <i class="fas fa-music"></i>
+          </div>
+
+          <div class="nav-icon">
+            <i class="fas fa-link"></i>
+          </div>
+        </div>
+
+        <div class="sidebar-volume">
+          <div class="volume-pill-bar">
+            <div class="volume-pill"></div>
+          </div>
+          <div class="volumebtns">
+            <a href="#" type="button" class="volumenbtn">
+              <i class="fas fa-volume-up"></i>
+            </a>
+            <a href="#" type="button" class="volumebtnmute">
+              <i class="fas fa-volume-off" style="display:none;"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-icon nav-icon--grid">
+          <i class="fas fa-th"></i>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="maincontent">
+        <div class="backcont">
+          <button type="button" style="cursor:pointer" class="glass-panel">
+            <i class="fas fa-chevron-left"></i> Back
+          </button>
+        </div>
+
+        <div class="content-grid">
+
+          <div class="now-playing glass-panel">
+            <div class="now-playing-badge glass-panel glass-panel--green">
+              <i class="fas fa-music"></i>
+            </div>
+
+            <div class="songtext">
+              <h3 id="songname">No media present</h3>
+              <h4 id="author"></h4>
+            </div>
+
+            <div class="buttons">
+              <a href="#" type="button" class="btn2" onclick="backSong();">
+                <i class="fas fa-backward"></i>
+              </a>
+              <a href="#" class="btn glass-panel glass-panel--green">
+                <i class="fas fa-play"></i>
+              </a>
+              <a href="#" class="btn3 glass-panel glass-panel--green" style="display:none;">
+                <i class="fas fa-pause"></i>
+              </a>
+              <a id="nextsongbutton" href="#" type="button" class="btn4" onclick="nextSong();">
+                <i class="fas fa-forward"></i>
+              </a>
+            </div>
+
+            <div class="song-progress">
+              <div class="song-progress-fill"></div>
+              <div class="song-time">
+                <span class="current-time">0:00</span>
+                <span class="song-length">0:00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="musicthumb glass-panel">
+            <img id="musicthumbanil" src="https://i.imgur.com/M5Lnw3o.png">
+          </div>
+
+          <div class="nextup glass-panel">
+            <div class="panel-header"><i class="fas fa-list"></i> Up Next</div>
+            <div class="nextcontainer">
+              <ul class="song-list">
+              </ul>
+            </div>
+          </div>
+
+          <div class="songinput glass-panel">
+            <form class="song-form">
+              <label for="songid"><i class="fas fa-link"></i> Song Link</label>
+              <input type="url" id="songid" class="song-input" placeholder="Paste song link here...">
+              <input type="submit" value="Submit" class="song-submit" id="myButton">
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

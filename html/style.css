@@ -1,0 +1,605 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* ==========================================================================
+   Shared glassmorphism theme
+   One reusable source of truth for every menu / dropdown / popover / panel /
+   card / drawer surface in the app. Apply `.glass-panel` to the container;
+   apply `.glass-panel--green` on top of it for the accented surfaces.
+   A component that needs a different corner radius than the shared default
+   sets --panel-radius on itself instead of forking the class.
+   ========================================================================== */
+:root {
+  --glass-bg: rgba(20, 20, 25, 0.45);
+  --glass-blur: 16px;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-radius: 12px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --glass-green: #1ee65a;
+
+  --app-bg: #05070a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(235, 245, 240, 0.62);
+  --text-tertiary: rgba(235, 245, 240, 0.4);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.glass-panel {
+  background:
+    radial-gradient(140% 130% at 12% -10%, rgba(30, 230, 90, 0.10), transparent 55%),
+    var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  /* falls back to the shared radius; a component sets --panel-radius to keep
+     whatever corner radius it already used before this pass */
+  border-radius: var(--panel-radius, var(--glass-radius));
+  box-shadow: var(--glass-shadow);
+}
+
+/* Green-tinted variant, layered on top of .glass-panel for accented surfaces
+   (the app icon, the active nav tab, the play button) */
+.glass-panel--green {
+  background:
+    radial-gradient(140% 130% at 20% 0%, rgba(30, 230, 90, 0.45), transparent 60%),
+    linear-gradient(155deg, rgba(30, 230, 90, 0.32), rgba(20, 20, 25, 0.45) 75%);
+  border: 1px solid rgba(30, 230, 90, 0.35);
+  box-shadow: var(--glass-shadow), 0 0 18px rgba(30, 230, 90, 0.25);
+}
+
+/* ==========================================================================
+   App frame
+   ========================================================================== */
+.maincontainer {
+  height: 776px;
+  width: 1500px;
+}
+
+.carimage {
+  height: 100%;
+  width: 100%;
+  --panel-radius: 28px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+.sidebar {
+  --panel-radius: 0px;
+  width: 190px;
+  flex: 0 0 190px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 0 22px;
+  box-sizing: border-box;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-left: 24px;
+  color: var(--text-primary);
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.status-bar i {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 44px;
+}
+
+.app-dock-icon {
+  width: 74px;
+  height: 74px;
+  --panel-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-dock-icon img {
+  width: 66%;
+  height: 66%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(30, 230, 90, 0.45));
+}
+
+.nav-icon {
+  position: relative;
+  width: 74px;
+  height: 62px;
+  --panel-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 22px;
+  background: transparent;
+}
+
+.nav-icon--active {
+  color: var(--glass-green);
+}
+
+.nav-icon-indicator {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 26px;
+  border-radius: 3px;
+  background: var(--glass-green);
+  box-shadow: 0 0 10px rgba(30, 230, 90, 0.7);
+}
+
+.nav-icon--grid {
+  margin-top: auto;
+  color: var(--text-secondary);
+  font-size: 19px;
+}
+
+.sidebar-volume {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.volume-pill-bar {
+  width: 18px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.volume-pill {
+  width: 100%;
+  height: 0%;
+  background: var(--glass-green);
+  box-shadow: 0 0 10px rgba(30, 230, 90, 0.6);
+  border-radius: 9px;
+  transition: height 0.2s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.volumebtns {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.volumebtns a {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Main content
+   ========================================================================== */
+.maincontent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 34px;
+  box-sizing: border-box;
+}
+
+.backcont {
+  flex: 0 0 auto;
+  margin-bottom: 22px;
+}
+
+.backcont button {
+  --panel-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px 10px 16px;
+  font-size: 17px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.backcont button i {
+  color: var(--glass-green);
+  font-size: 15px;
+}
+
+.content-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "now    thumb"
+    "next   link";
+  gap: 22px;
+}
+
+/* ---------- Now playing card ---------- */
+.now-playing {
+  grid-area: now;
+  min-height: 0;
+  padding: 30px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.now-playing-badge {
+  width: 78px;
+  height: 78px;
+  --panel-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--glass-green);
+  margin-bottom: 18px;
+}
+
+.songtext {
+  text-align: center;
+  color: var(--text-primary);
+  max-width: 90%;
+}
+
+.songtext h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.songtext h4 {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+#author:empty::after {
+  content: "Add media to get started";
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.buttons .btn2,
+.buttons .btn4 {
+  background: transparent;
+  font-size: 26px;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.buttons .btn,
+.buttons .btn3 {
+  --panel-radius: 50%;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.buttons .btn i,
+.buttons .btn3 i {
+  margin-left: 2px; /* optical centering for the play glyph */
+}
+
+.buttons .btn3 i {
+  margin-left: 0;
+}
+
+.buttons .btn:active,
+.buttons .btn2:active,
+.buttons .btn3:active,
+.buttons .btn4:active {
+  color: rgba(102, 102, 102, 0.5);
+  animation: colorchange 3s linear infinite;
+}
+
+@keyframes colorchange {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.song-progress {
+  margin-top: auto;
+  width: 100%;
+  max-width: 460px;
+  height: 4px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.14);
+  position: relative;
+}
+
+.song-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 20px;
+  width: 0;
+  background-color: var(--glass-green);
+  /* script.js repaints this element's inline background-image as a solid
+     white gradient on every playback/seek update (pre-existing behaviour,
+     left untouched) - override the paint here, purely visual, so the fill
+     stays the theme's green instead of flashing white. */
+  background-image: none !important;
+}
+
+.song-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--glass-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(30, 230, 90, 0.8);
+  transform: translate(50%, -50%);
+}
+
+.song-time {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.current-time {
+  margin-right: 5px;
+}
+
+.song-length {
+  margin-left: 5px;
+}
+
+/* ---------- Album art / thumbnail card ---------- */
+.musicthumb {
+  grid-area: thumb;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 20px;
+}
+
+.musicthumb::before {
+  content: "\f03e"; /* fa-image, decorative corner glyph like the mockup */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.musicthumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Up next / queue card ---------- */
+.nextup {
+  grid-area: next;
+  min-height: 0;
+  padding: 20px 22px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--glass-green);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+}
+
+.nextcontainer {
+  flex: 1;
+  min-height: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nextcontainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nextcontainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.nextcontainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.song-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.song-list li {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  word-wrap: break-word;
+  transition: background-color 0.2s ease-in-out;
+  border: none;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.nextcontainer .song-list li:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.nextcontainer .song-list li:active {
+  background-color: rgba(30, 230, 90, 0.25);
+  color: var(--text-primary);
+  transform: scale(0.98);
+}
+
+/* ---------- Song link card ---------- */
+.songinput {
+  grid-area: link;
+  padding: 20px 22px;
+  box-sizing: border-box;
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+.song-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-form label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--glass-green);
+  letter-spacing: 0.3px;
+}
+
+.song-input, .song-submit {
+  margin-top: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.song-input {
+  padding: 11px 16px;
+  color: var(--text-primary);
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+}
+
+.song-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.song-submit {
+  background: rgba(30, 230, 90, 0.16);
+  border-color: rgba(30, 230, 90, 0.35);
+  color: var(--text-primary);
+  font-family: 'Roboto', sans-serif;
+  padding: 11px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.song-submit:hover {
+  background: rgba(30, 230, 90, 0.28);
+}
+
+.song-submit:active {
+  background: rgba(30, 230, 90, 0.4);
+  transform: translateY(2px);
+}
+
+/* ==========================================================================
+   Misc / utility (unchanged behaviour)
+   ========================================================================== */
+#maincontainer.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+#myButton[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
