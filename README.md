@@ -17,7 +17,7 @@
 
 ## Extra Information
 
- Please leave any issues you may have here on github
+ Please leave any issues you may have here on github or you can join my discord from the link below (faster replies)
 
 # Support
 Join our discord <a href='https://discord.gg/2fRQwbUHH3'>HERE</a> for support!
