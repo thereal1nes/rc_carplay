@@ -17,8 +17,17 @@
 
 ## Extra Information
 
-
  Please leave any issues you may have here on github
 
 # Support
 Join our discord <a href='https://discord.gg/2fRQwbUHH3'>HERE</a> for support!
+
+## Credits
+
+Original resource created by **[najeetpie](https://github.com/najeetpie)**.
+
+This project is a modified version of their original NASS CarPlay resource. Full credit goes to the original author for the initial work. I've made my own changes and improvements on top of it.
+
+Original repository: https://github.com/najeetpie/nass_carplay
+
+Thanks to the original creator for making the resource available!
